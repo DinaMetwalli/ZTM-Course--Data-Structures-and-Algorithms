@@ -26,11 +26,11 @@ def brute_force_matching_element(arr1, arr2) -> str:
 def improved_matching_element(arr1, arr2) -> bool:
     try:
         dictionary = dict()
-        for i in range(len(arr1)):
+        for i in range(len(arr1)): # O(n)
             dictionary[arr1[i]] = True
         print(dictionary)
 
-        for i in range(len(arr2)):
+        for i in range(len(arr2)): # O(m)
             if dictionary[arr2[i]]:
                 return True
         return False
@@ -39,3 +39,4 @@ def improved_matching_element(arr1, arr2) -> bool:
         return "An input of two arrays is required."
 
 improved_matching_element(array1, array2)
+# print(improved_matching_element(array1, 0))
