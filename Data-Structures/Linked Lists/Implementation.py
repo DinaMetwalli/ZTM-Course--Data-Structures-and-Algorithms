@@ -12,13 +12,13 @@ class LinkedList:
         self.tail = self.head
         self.length = 1
 
-    def append(self, value):
+    def append(self, value): # O(1)
         new_node = Node(value)
         self.tail.next = new_node
         self.tail = new_node
         self.length += 1
 
-    def prepend(self, value):
+    def prepend(self, value): # O(1)
         new_head = Node(value)
         new_head.next = self.head
         self.head = new_head
@@ -32,7 +32,7 @@ class LinkedList:
             current_node = current_node.next
         print("Linked List: ", array, " Length: ", self.length)
     
-    def traverse_list(self, index) -> Node:
+    def traverse_list(self, index) -> Node: # O(n)
         position = 0
         current_node = self.head
         while current_node != None:
@@ -41,7 +41,7 @@ class LinkedList:
             position += 1
             current_node = current_node.next
 
-    def insert(self, index, value):
+    def insert(self, index, value): # O(n)
         if index == 0:
             self.prepend(value)
             return
@@ -59,8 +59,22 @@ class LinkedList:
 
         self.length += 1
 
-        def remove(self, index):
+    def remove(self, index): # O(n)
+        if self.head == None:
+            print("No nodes found to delete from the list.")
             return
+        if index == 0:
+            self.head = self.head.next
+            if self.head == None or self.head.next == None:
+                self.tail = self.head
+            self.length -= 1    
+            return
+        if index >= self.length:
+            print("No node found at this position.")
+            return
+        current_node = self.traverse_list(index-1)
+        current_node.next = current_node.next.next
+        self.length -= 1
 
 my_linked_list = LinkedList(10)
 my_linked_list.print_list()
@@ -93,3 +107,19 @@ print(my_linked_list.tail.value)
 my_linked_list.insert(7, 88)
 my_linked_list.print_list()
 print(my_linked_list.tail.value)
+
+my_linked_list.remove(1)
+my_linked_list.print_list()
+
+my_linked_list.remove(7)
+
+my_new_list = LinkedList(3)
+# 3 -> None
+my_new_list.append(7)
+# 3 -> 7 -> None
+my_new_list.remove(0)
+# 7 -> None
+my_new_list.remove(0)
+# None
+my_new_list.remove(5)
+my_new_list.print_list()
