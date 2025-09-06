@@ -32,6 +32,15 @@ class LinkedList:
             current_node = current_node.next
         print("Linked List: ", array, " Length: ", self.length)
     
+    def traverse_list(self, index) -> Node:
+        position = 0
+        current_node = self.head
+        while current_node != None:
+            if position == index:
+                return current_node
+            position += 1
+            current_node = current_node.next
+
     def insert(self, index, value):
         if index == 0:
             self.prepend(value)
@@ -42,17 +51,16 @@ class LinkedList:
             self.append(value)
             return
 
-        position = 0
-        current_node = self.head
         new_node = Node(value)
-        while current_node != None:
-            if position == index-1:
-                new_node.next = current_node.next
-                current_node.next = new_node
-                self.length += 1
-                return
-            position += 1
-            current_node = current_node.next
+        current_node = self.traverse_list(index-1)
+
+        new_node.next = current_node.next
+        current_node.next = new_node
+
+        self.length += 1
+
+        def remove(self, index):
+            return
 
 my_linked_list = LinkedList(10)
 my_linked_list.print_list()
