@@ -31,6 +31,28 @@ class LinkedList:
             array.append(current_node.value)
             current_node = current_node.next
         print("Linked List: ", array, " Length: ", self.length)
+    
+    def insert(self, index, value):
+        if index == 0:
+            self.prepend(value)
+            return
+        elif index >= self.length:
+            if index > self.length:
+                print("Position provided is unavailable. Inserting at end of list instead.")
+            self.append(value)
+            return
+
+        position = 0
+        current_node = self.head
+        new_node = Node(value)
+        while current_node != None:
+            if position == index-1:
+                new_node.next = current_node.next
+                current_node.next = new_node
+                self.length += 1
+                return
+            position += 1
+            current_node = current_node.next
 
 my_linked_list = LinkedList(10)
 my_linked_list.print_list()
@@ -47,3 +69,19 @@ my_linked_list.print_list()
 my_linked_list.prepend(1)
 my_linked_list.print_list()
 # 1 -> 10 -> 5 -> 16 -> None. Size = 4
+
+my_linked_list.insert(2, 44)
+my_linked_list.print_list()
+
+# test inserting at the start:
+my_linked_list.insert(0, 13)
+my_linked_list.print_list()
+
+# test inserting at invalid index:
+my_linked_list.insert(7, 17)
+my_linked_list.print_list()
+print(my_linked_list.tail.value)
+
+my_linked_list.insert(7, 88)
+my_linked_list.print_list()
+print(my_linked_list.tail.value)
