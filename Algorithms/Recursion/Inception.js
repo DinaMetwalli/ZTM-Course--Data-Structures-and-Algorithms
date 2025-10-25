@@ -10,3 +10,7 @@ function inception() {
 }
 
 inception();
+
+// 1. identify base case.
+// 2. identify recursive case.
+// 3. return when needed - usually 2 returns.
