@@ -57,8 +57,19 @@ class BinarySearchTree:
                 queue.append(cur.left)
             if cur.right:
                 queue.append(cur.right)
-        return search_result                
-            
+        return search_result
+        
+    def breadth_first_search_recursive(self, queue, search_result):
+        if not len(queue): # if queue is empty
+            return search_result # base case
+        cur = queue.pop(0)
+        search_result.append(cur.value)
+        if cur.left:
+            queue.append(cur.left)
+        if cur.right:
+            queue.append(cur.right)
+        return self.breadth_first_search_recursive(queue, search_result)
+
 tree = BinarySearchTree()
 
 tree.insert(9)
@@ -78,3 +89,5 @@ tree.lookup(40)
 
 print(tree.breadth_first_search())
 # [9, 4, 20, 1, 6, 15, 170]
+
+print(tree.breadth_first_search_recursive([tree.root], []))
